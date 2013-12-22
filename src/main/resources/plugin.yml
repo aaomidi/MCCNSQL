@@ -1,0 +1,3 @@
+name: MCCN-SQL
+main: co.mccn.sql.SQL
+version: ${project.version}
