@@ -25,8 +25,8 @@ public class Database {
         this.databaseHost = config.getString("hostname");
         this.databasePort = String.valueOf(config.getInt("port"));
         this.databaseName = _plugin.getDatabaseName();
-        this.databaseUser = config.getString("username");
-        this.databasePass = config.getString("password");
+        this.databaseUser = _plugin.getUserName();
+        this.databasePass = _plugin.getPassWord();
         this.connection = DriverManager.getConnection(String.format("jdbc:mysql://%s:%s/%s", this.databaseHost, this.databasePort, this.databaseName), this.databaseUser, this.databasePass);
     }
 
