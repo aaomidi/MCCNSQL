@@ -18,15 +18,16 @@ public class Database {
 
     public Database(MCCNSQL plugin) throws SQLException {
         _plugin = plugin;
+        this.connect();
     }
 
     public void connect() throws SQLException {
         FileConfiguration config = this._plugin.getConfig();
-        this.databaseHost = config.getString("hostname");
+        this.databaseHost = _plugin.getConfig().getString("hostname");
         this.databasePort = String.valueOf(config.getInt("port"));
-        this.databaseName = _plugin.getDatabaseName();
-        this.databaseUser = _plugin.getUserName();
-        this.databasePass = _plugin.getPassWord();
+        this.databaseName = _plugin.getConfig().getString("database");
+        this.databaseUser = _plugin.getConfig().getString("username");
+        this.databasePass = _plugin.getConfig().getString("password");
         this.connection = DriverManager.getConnection(String.format("jdbc:mysql://%s:%s/%s", this.databaseHost, this.databasePort, this.databaseName), this.databaseUser, this.databasePass);
     }
 

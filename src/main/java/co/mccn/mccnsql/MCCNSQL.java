@@ -8,10 +8,7 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 
 public class MCCNSQL extends JavaPlugin {
-    private String databaseName;
     private Database database;
-    private String userName;
-    private String passWord;
 
     public final void onLoad() {
         if (!new File(this.getDataFolder(), "config.yml").exists()) {
@@ -23,6 +20,7 @@ public class MCCNSQL extends JavaPlugin {
     public final void onEnable() {
         try {
             this.database = new Database(this);
+            this.getLogger().log(Level.INFO,"MCCNSQL connected to the database.");
         } catch (SQLException ex) {
             this.getLogger().severe("Error connecting to database! Disabling...");
             ex.printStackTrace();
@@ -81,63 +79,6 @@ public class MCCNSQL extends JavaPlugin {
         this.buildAndFetchColumn(query, result, parameters);
     }
 
-    /**
-     * Set databaseName;
-     *
-     * @param databaseName
-     */
-    public void setDatabase(String databaseName) {
-        this.databaseName = databaseName;
-    }
 
-    /**
-     * Set database userName;
-     *
-     * @param userName
-     */
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
-    /**
-     * Set database passWord;
-     *
-     * @param passWord
-     */
-    public void setPassWord(String passWord) {
-        this.passWord = passWord;
-    }
-
-    /**
-     * @return userName String;
-     */
-    public String getUserName() {
-        return this.getUserName();
-    }
-
-    /**
-     * @return passWord String;
-     */
-    public String getPassWord() {
-        return this.passWord;
-    }
-
-    /**
-     * @return database Name;
-     */
-    public String getDatabaseName() {
-        return this.databaseName;
-    }
-
-    /**
-     * Initialize connection to database;
-     */
-    public void connect() {
-        try {
-            this.database.connect();
-        } catch (SQLException e) {
-            getLogger().log(Level.SEVERE, e.getMessage());
-        }
-    }
 
 }
